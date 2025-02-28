@@ -5,15 +5,15 @@ import plotly.graph_objects as go
 import numpy as np
 from io import BytesIO
 
-his_cota = pd.read_excel(r"G:\Meu Drive\Denver Asset\Clube Kairos\Relatório_Gerencial_Denver.xlsx", sheet_name="Historico_Cota")
+his_cota = pd.read_excel("Quadros para Relatório Gerencial.xlsx", sheet_name="Historico_Cota")
 
-cotistas = pd.read_excel(r"G:\Meu Drive\Denver Asset\Clube Kairos\Relatório_Gerencial_Denver.xlsx", sheet_name="Cotistas")
+cotistas = pd.read_excel("Quadros para Relatório Gerencial.xlsx", sheet_name="Cotistas")
 
-ativos = pd.read_excel(r"G:\Meu Drive\Denver Asset\Clube Kairos\Relatório_Gerencial_Denver.xlsx", sheet_name="Ativos")
+ativos = pd.read_excel("Quadros para Relatório Gerencial.xlsx", sheet_name="Ativos")
 
-rent_mensal = pd.read_excel(r"G:\Meu Drive\Denver Asset\Clube Kairos\Relatório_Gerencial_Denver.xlsx", sheet_name="Rent_Mensal", header=2)
+rent_mensal = pd.read_excel("Quadros para Relatório Gerencial.xlsx", sheet_name="Rent_Mensal", header=2)
 
-selic_hoje = pd.read_excel(r"G:\Meu Drive\Denver Asset\Clube Kairos\Relatório_Gerencial_Denver.xlsx", sheet_name="Selic")
+selic_hoje = pd.read_excel("Quadros para Relatório Gerencial.xlsx", sheet_name="Selic")
 
 nome_clube = "CLUBE DE INVESTIMENTO KAIROS"
 data_atual = his_cota["Data "].max()
