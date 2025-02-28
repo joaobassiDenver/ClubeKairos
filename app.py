@@ -11,7 +11,7 @@ cotistas = pd.read_excel("Relatório_Gerencial_Denver.xlsx" ,sheet_name="Cotista
 
 ativos = pd.read_excel("Relatório_Gerencial_Denver.xlsx" ,sheet_name="Ativos")
 
-rent_mensal = pd.read_excel("Relatório_Gerencial_Denver.xlsx" ,sheet_name="Rent_Mensal", header=2)
+rent_mensal = pd.read_excel("Relatório_Gerencial_Denver.xlsx" ,sheet_name="Rent_Mensal", header=6)
 
 selic_hoje = pd.read_excel("Relatório_Gerencial_Denver.xlsx" ,sheet_name="Selic")
 
