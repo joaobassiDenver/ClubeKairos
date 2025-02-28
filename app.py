@@ -5,15 +5,15 @@ import plotly.graph_objects as go
 import numpy as np
 from io import BytesIO
 
-his_cota = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Historico_Cota")
+his_cota = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Historico_Cota", engine="openpyxl")
 
-cotistas = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Cotistas")
+cotistas = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Cotistas", engine="openpyxl")
 
-ativos = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Ativos")
+ativos = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Ativos", engine="openpyxl")
 
-rent_mensal = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Rent_Mensal", header=2)
+rent_mensal = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Rent_Mensal", header=2, engine="openpyxl")
 
-selic_hoje = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Selic")
+selic_hoje = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/7383259ae891e75341d9c10c11f05ce58a68f1ab/Quadros%20para%20Relat%C3%B3rio%20Gerencial.xlsx", sheet_name="Selic", engine="openpyxl")
 
 nome_clube = "CLUBE DE INVESTIMENTO KAIROS"
 data_atual = his_cota["Data "].max()
