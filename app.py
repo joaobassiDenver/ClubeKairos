@@ -5,15 +5,15 @@ import plotly.graph_objects as go
 import numpy as np
 from io import BytesIO
 
-his_cota = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx", engine="openpyxl" ,sheet_name="Historico_Cota")
+his_cota = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx" ,sheet_name="Historico_Cota")
 
-cotistas = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx", engine="openpyxl" ,sheet_name="Cotistas")
+cotistas = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx" ,sheet_name="Cotistas")
 
-ativos = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx", engine="openpyxl" ,sheet_name="Ativos")
+ativos = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx" ,sheet_name="Ativos")
 
-rent_mensal = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx", engine="openpyxl" ,sheet_name="Rent_Mensal", header=2)
+rent_mensal = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx" ,sheet_name="Rent_Mensal", header=2)
 
-selic_hoje = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx", engine="openpyxl" ,sheet_name="Selic")
+selic_hoje = pd.read_excel("https://github.com/joaobassiDenver/ClubeKairos/blob/ac85a79fae6e7852b2ce4f49a94d7b3f65bd0c9e/Relat%C3%B3rio_Gerencial_Denver.xlsx" ,sheet_name="Selic")
 
 nome_clube = "CLUBE DE INVESTIMENTO KAIROS"
 data_atual = his_cota["Data "].max()
