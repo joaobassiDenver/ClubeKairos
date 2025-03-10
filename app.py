@@ -287,8 +287,7 @@ composicao_carteira_atual = ativos[ativos["Data"] == data_atual]
 
 composicao_carteira_atual_download = save_to_excel(composicao_carteira_atual)
 
-#st.download_button(f"Baixar Composição da Carteira - {data_atual.strftime('%d/%m/%Y')}", composicao_carteira_atual_download, 
-                   file_name=f"{nome_clube}_Composição_Carteira_{data_atual.strftime('%m-%Y')}.xlsx")
+#st.download_button(f"Baixar Composição da Carteira - {data_atual.strftime('%d/%m/%Y')}", composicao_carteira_atual_download, file_name=f"{nome_clube}_Composição_Carteira_{data_atual.strftime('%m-%Y')}.xlsx")
 
 st.markdown("""
     <style>
