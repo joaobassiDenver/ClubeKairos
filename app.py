@@ -163,34 +163,34 @@ st.markdown(
 
 st.markdown("---")
 
-st.subheader("Evolução do Patrimônio Líquido")
+#st.subheader("Evolução do Patrimônio Líquido")
 
-fig_pl = px.line(his_cota, x="Data ", y="Patrimônio")
-st.plotly_chart(fig_pl)
+#fig_pl = px.line(his_cota, x="Data ", y="Patrimônio")
+#st.plotly_chart(fig_pl)
 
-st.markdown("---")
+#st.markdown("---")
 
-st.subheader("Evolução de Cotistas")
+#st.subheader("Evolução de Cotistas")
 
-evolucao_cotista = cotistas.groupby("Data").agg({"CPF": "count"})
-evolucao_cotista.reset_index(inplace=True)
+#evolucao_cotista = cotistas.groupby("Data").agg({"CPF": "count"})
+#evolucao_cotista.reset_index(inplace=True)
 
-fig_cotista = px.line(evolucao_cotista, x="Data", y="CPF")
-fig_cotista.update_layout(xaxis_title = "Data", yaxis_title="Nº de Cotistas")
-st.plotly_chart(fig_cotista)
+#fig_cotista = px.line(evolucao_cotista, x="Data", y="CPF")
+#fig_cotista.update_layout(xaxis_title = "Data", yaxis_title="Nº de Cotistas")
+#st.plotly_chart(fig_cotista)
 
-st.markdown("---")
+#st.markdown("---")
 
-st.subheader("Diversificação por Ativos")
+#st.subheader("Diversificação por Ativos")
 
-alocacao_ativos = ativos.groupby("Ativo").agg({"% PL": "sum"}) *100
-alocacao_ativos.reset_index(inplace=True)
+#alocacao_ativos = ativos.groupby("Ativo").agg({"% PL": "sum"}) *100
+#alocacao_ativos.reset_index(inplace=True)
 
-fig_evolucao_ativo = px.pie(alocacao_ativos, names="Ativo", values="% PL")
+#fig_evolucao_ativo = px.pie(alocacao_ativos, names="Ativo", values="% PL")
 
-st.plotly_chart(fig_evolucao_ativo)
+#st.plotly_chart(fig_evolucao_ativo)
 
-st.markdown("---")
+#st.markdown("---")
 
 
 st.subheader("Diversificação da Carteira por Setor")
@@ -287,7 +287,7 @@ composicao_carteira_atual = ativos[ativos["Data"] == data_atual]
 
 composicao_carteira_atual_download = save_to_excel(composicao_carteira_atual)
 
-st.download_button(f"Baixar Composição da Carteira - {data_atual.strftime('%d/%m/%Y')}", composicao_carteira_atual_download, 
+#st.download_button(f"Baixar Composição da Carteira - {data_atual.strftime('%d/%m/%Y')}", composicao_carteira_atual_download, 
                    file_name=f"{nome_clube}_Composição_Carteira_{data_atual.strftime('%m-%Y')}.xlsx")
 
 st.markdown("""
