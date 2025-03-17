@@ -3,7 +3,6 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
-
 from io import BytesIO
 
 his_cota = pd.read_excel("Relatório_Gerencial_Denver.xlsx" ,sheet_name="Historico_Cota")
@@ -404,6 +403,53 @@ st.text(texto_var_clube)
 st.text("")
 
 st.text(texto_var_ibov)
+
+st.markdown("---")
+
+st.subheader("Drawndown Máximo")
+
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+import plotly.graph_objects as go
+import numpy as np
+
+# Supondo que his_cota["Acum - Kairos"] seja um DataFrame com uma coluna de valores acumulados
+
+dd_df = pd.DataFrame()
+
+dd_df["Acum - Kairos"] = his_cota["Acum - Kairos"]
+
+# Calcular o pico acumulado
+dd_df['Pico_Acumulado'] = dd_df['Acum - Kairos'].cummax()
+
+# Calcular o drawdown
+dd_df['Drawdown'] = (dd_df['Acum - Kairos'] - dd_df['Pico_Acumulado'])
+
+# Exibir o drawdown máximo
+max_drawdown = dd_df['Drawdown'].min()
+st.subheader(f"Drawdown Máximo: {max_drawdown:.2%}")
+
+# Criar o gráfico do drawdown
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=dd_df.index,
+    y=dd_df['Drawdown'],
+    mode='lines',
+    name='Drawdown',
+    line=dict(color='red')
+))
+
+fig.update_layout(
+    title='Drawdown ao Longo do Tempo',
+    xaxis_title='Data',
+    yaxis_title='Drawdown',
+    yaxis_tickformat='.2%',
+    showlegend=True
+)
+
+st.plotly_chart(fig)
 
 st.markdown("---")
 
