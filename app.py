@@ -409,40 +409,50 @@ st.markdown("---")
 st.subheader("Drawndown Máximo")
 
 import pandas as pd
-import streamlit as st
-import plotly.express as px
 import plotly.graph_objects as go
-import numpy as np
+import streamlit as st
 
-# Supondo que his_cota["Acum - Kairos"] seja um DataFrame com uma coluna de valores acumulados
-
+# Supondo que 'his_cota' já está definido e é um DataFrame
 dd_df = pd.DataFrame()
-
-dd_df["Acum - Kairos"] = his_cota["Acum - Kairos"]
+dd_df = his_cota[["Acum - Kairos", "Acum - Ibov"]]
 
 # Calcular o pico acumulado
-dd_df['Pico_Acumulado'] = dd_df['Acum - Kairos'].cummax()
+dd_df['Pico_Acumulado_Kairos'] = dd_df['Acum - Kairos'].cummax()
+dd_df['Pico_Acumulado_Ibov'] = dd_df['Acum - Ibov'].cummax()
 
 # Calcular o drawdown
-dd_df['Drawdown'] = (dd_df['Acum - Kairos'] - dd_df['Pico_Acumulado'])
+dd_df['Drawdown_Kairos'] = (dd_df['Acum - Kairos'] - dd_df['Pico_Acumulado_Kairos'])
+dd_df['Drawdown_Ibov'] = (dd_df['Acum - Ibov'] - dd_df['Pico_Acumulado_Ibov'])
 
 # Exibir o drawdown máximo
-max_drawdown = dd_df['Drawdown'].min()
-st.subheader(f"Drawdown Máximo: {max_drawdown:.2%}")
+max_drawdown_Kairos = dd_df['Drawdown_Kairos'].min()
+max_drawdown_Ibov = dd_df['Drawdown_Ibov'].min()
+st.subheader(f"Drawdown Máximo - Clube: {max_drawdown_Kairos:.2%}")
+st.subheader(f"Drawdown Máximo - Ibov: {max_drawdown_Ibov:.2%}")
 
 # Criar o gráfico do drawdown
 fig = go.Figure()
 
+# Adicionar a linha de Drawdown para Kairos
 fig.add_trace(go.Scatter(
     x=dd_df.index,
-    y=dd_df['Drawdown'],
+    y=dd_df['Drawdown_Kairos'],
     mode='lines',
-    name='Drawdown',
+    name='Drawdown Kairos',
+    line=dict(color='blue')
+))
+
+# Adicionar a linha de Drawdown para Ibov
+fig.add_trace(go.Scatter(
+    x=dd_df.index,
+    y=dd_df['Drawdown_Ibov'],
+    mode='lines',
+    name='Drawdown Ibov',
     line=dict(color='red')
 ))
 
 fig.update_layout(
-    title='Drawdown ao Longo do Tempo',
+    title='Comparativo de Drawdown ao Longo do Tempo',
     xaxis_title='Data',
     yaxis_title='Drawdown',
     yaxis_tickformat='.2%',
