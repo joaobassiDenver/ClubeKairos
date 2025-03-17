@@ -3,6 +3,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
+
 from io import BytesIO
 
 his_cota = pd.read_excel("Relatório_Gerencial_Denver.xlsx" ,sheet_name="Historico_Cota")
@@ -79,11 +80,56 @@ estatisca_df = pd.DataFrame({
     "Cota Máxima": [cota_max]
 })
 
-estatisca_df = estatisca_df.T
 
-estatisca_df.columns = ["R$"]
+# 🔹 Estilização aprimorada da tabela
+st.markdown("""
+    <style>
+        /* Centralizando a tabela */
+        .stMarkdown {
+            display: flex;
+            justify-content: center;
+        }
 
-st.table(estatisca_df)
+        /* Personalização geral */
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #FDFDFD; /* Fundo leve */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cabeçalho */
+        th {
+            background-color: #5E17EB; /* Roxo moderno */
+            color: white;
+            font-size: 16px;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 3px solid #8A03F8;
+        }
+
+        /* Células */
+        td {
+            font-size: 15px;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Hover */
+        tr:hover td {
+            background-color: #EEE4FF; /* Lilás suave */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# 🔹 Exibir tabela com estilo aplicado
+st.markdown(
+    estatisca_df.to_html(index=False, escape=False), 
+    unsafe_allow_html=True
+)
 
 st.markdown("---")
 
@@ -108,60 +154,75 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-import streamlit as st
-import pandas as pd
 
 st.subheader("Quadro de Rentabilidade Mensal - Kairos x Ibovespa")
 
 tabela_rent_mensal = rent_mensal  # Substitua com seu DataFrame real
 
-# 🔹 Função para formatar valores percentuais
+
 def format_percent(value):
     if isinstance(value, (int, float)):
-        return f"{value * 100:.2f}%"
+        color = "green" if value >= 0 else "red"
+        return f'<span style="color:{color};">{value * 100:.2f}%</span>'
     return value
 
 # 🔹 Aplicar a formatação na tabela
-tabela_rent_mensal_formatted = tabela_rent_mensal.applymap(format_percent)
+tabela_rent_mensal_formatted = tabela_rent_mensal.copy()
+for col in tabela_rent_mensal.columns[1:]:  # Apenas colunas numéricas
+    tabela_rent_mensal_formatted[col] = tabela_rent_mensal[col].apply(format_percent)
 
-# 🔹 Estilização aprimorada
+# 🔹 Estilização aprimorada para a tabela
 st.markdown("""
     <style>
-        /* Personalização da tabela */
+        /* Centralizando a tabela */
+        .stMarkdown {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Personalização geral da tabela */
         table {
-            width: 100%;
+            width: 80%;
             border-collapse: collapse;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
+            background-color: #FDFDFD; /* Fundo leve */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Cabeçalho da tabela */
         th {
-            background-color: #8A03F8; /* Roxo vibrante */
+            background-color: #5E17EB; /* Roxo moderno */
             color: white;
-            font-size: 14px;
-            padding: 10px;
+            font-size: 16px;
+            padding: 12px;
             text-align: center;
+            border-bottom: 3px solid #8A03F8;
         }
+
+        /* Células da tabela */
         td {
-            background-color: #F9F9F9; /* Fundo neutro para leitura */
-            color: #333;
-            font-size: 14px;
-            padding: 10px;
+            font-size: 15px;
+            padding: 12px;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
+
+        /* Efeito hover */
         tr:hover td {
-            background-color: #E6D3FA; /* Roxo suave no hover */
+            background-color: #EEE4FF; /* Lilás suave */
         }
     </style>
 """, unsafe_allow_html=True)
 
-# 🔹 Exibir tabela com estilos aprimorados
+# 🔹 Exibir tabela no Streamlit
 st.markdown(
     tabela_rent_mensal_formatted.to_html(index=False, escape=False), 
     unsafe_allow_html=True
 )
 
 st.markdown("---")
+
 
 #st.subheader("Evolução do Patrimônio Líquido")
 
@@ -239,7 +300,7 @@ dp_ibov = round(float(his_cota["Rent - Ibov"].std()), 4)*100
 
 selic_hoje = selic_hoje["Selic Hoje"].iloc[0]*100
 
-n=int(2)
+n=int(3)
 
 selic_equivalente = round(((1 + (selic_hoje/100)) ** (n/12) -1) * 100, 4)
 
@@ -257,14 +318,92 @@ portifolio_df = pd.DataFrame({
 })
 
 
-st.table(portifolio_df.T)
-
 st.markdown("""
-    <div style='font-size:14px; color:#555; background-color:#F3F3F3; padding:10px; border-radius:8px;'>
+    <style>
+        /* Centralizando a tabela */
+        .stMarkdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Personalização geral */
+        table {
+            width: 100%;  /* Ajustando a largura para ocupar mais espaço */
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #FDFDFD; /* Fundo leve */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        /* Cabeçalho */
+        th {
+            background-color: #5E17EB; /* Roxo moderno */
+            color: white;
+            font-size: 14px;
+            padding: 2px;
+            text-align: center;
+        }
+
+        /* Células */
+        td {
+            font-size: 14px;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Hover */
+        tr:hover td {
+            background-color: #EEE4FF; /* Lilás suave */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# 🔹 Exibir tabela com estilo aplicado
+st.markdown(
+    portifolio_df.to_html(index=False, escape=False), 
+    unsafe_allow_html=True
+)
+
+# 🔹 Explicação do Sharpe com formatação aprimorada
+st.markdown("""
+    <div style='font-size:14px; color:#555; background-color:#F3F3F3; padding:10px; border-radius:8px; text-align:center;'>
         <strong>(*) Índice de Sharpe:</strong> mede a relação entre risco e retorno de um investimento, indicando se os retornos obtidos foram suficientes para compensar a volatilidade assumida. Quanto maior o índice, melhor foi a rentabilidade ajustada ao risco. 
     </div>
 """, unsafe_allow_html=True)
 
+st.markdown("---")
+
+
+st.subheader("VaR - Value at Risk")
+
+st.markdown("""
+    <div style='font-size:14px; color:#555; background-color:#F3F3F3; padding:10px; border-radius:8px;'>
+        <strong>(*) VaR: </strong> Mede a perda máxima esperada em um intervalo de 21 dias úteis com intervalo de confiança de 95%. 
+    </div>
+""", unsafe_allow_html=True)
+
+dias_uteis = 21
+intervalo_confianca_z_norm = 1.645
+valor_em_risco = 100
+
+var_kairos = intervalo_confianca_z_norm * (dp_kairos/100) * np.sqrt(dias_uteis) * valor_em_risco
+var_ibov = intervalo_confianca_z_norm * (dp_ibov/100) * np.sqrt(dias_uteis) * valor_em_risco
+
+texto_var_clube = f"Clube - Temos um probabilidade de 5% de perder um valor superior a R$ {round(var_kairos, 2)} em um período de {dias_uteis} dias."
+texto_var_ibov = f"Ibovespa - Temos um probabilidade de 5% de perder um valor superior a R$ {round(var_ibov, 2)} em um período de {dias_uteis} dias."
+
+st.text("")
+
+st.text(texto_var_clube)
+
+st.text("")
+
+st.text(texto_var_ibov)
 
 st.markdown("---")
 
