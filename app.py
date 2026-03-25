@@ -136,7 +136,7 @@ st.subheader("Rentabilidade Acumulada - Kairos x Ibovespa")
 
 
 fig_rent_100 = px.line(his_cota, x="Data ", y=["Cota 100 - Ibov", "Cota 100 - Kairos"], title="Kairos x Ibov - Cota base R$ 100,00")
-st.dataframe(his_cota[["Data ", "Cota 100 - Ibov", "Cota 100 - Kairos"]])
+
 fig_rent_100.update_layout(xaxis_title="Data", yaxis_title="Valor da Cota (R$)")
 st.plotly_chart(fig_rent_100)
 
