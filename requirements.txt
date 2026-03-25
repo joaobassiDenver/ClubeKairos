@@ -4,4 +4,4 @@ plotly
 numpy
 openpyxl
 altair<5
-
+imghdr
